@@ -69,8 +69,8 @@ while cap.isOpened():
     ret, img = cap.read()
 
     img_grey = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    img_blur = cv.blur(img_grey, (3,3))
-    # img_blur = cv.GaussianBlur(img_grey, (3,3), 0)
+    # img_blur = cv.blur(img_grey, (3,3))
+    img_blur = cv.GaussianBlur(img_grey, (3,3), 0)
     img_erode = cv.erode(img_blur, np.ones((3,3),np.uint8), iterations=3)
     edges = cv.Canny(img_erode, threshold, threshold*7, apertureSize=3)
     edges = cv.dilate(edges, np.ones((3,3),np.uint8), iterations=3, borderType=1, borderValue=1)
