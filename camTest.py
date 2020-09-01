@@ -62,7 +62,7 @@ def findLines(lines, newApprox, maxL):
 
 kernel = np.ones((5,5),np.uint8)
 kernel_0 = np.zeros_like((3,3),np.uint8)
-threshold = 40
+threshold = 30
 
 cap = cv.VideoCapture(0)
 while cap.isOpened():
@@ -72,7 +72,8 @@ while cap.isOpened():
     # img_blur = cv.blur(img_grey, (3,3))
     img_blur = cv.GaussianBlur(img_grey, (3,3), 0)
     img_erode = cv.erode(img_blur, np.ones((3,3),np.uint8), iterations=3)
-    edges = cv.Canny(img_erode, threshold, threshold*7, apertureSize=3)
+    # edges = cv.Canny(img_erode, threshold, threshold*7, apertureSize=3)
+    edges = cv.Canny(img_erode, threshold, threshold*3, apertureSize=3)
     edges = cv.dilate(edges, np.ones((3,3),np.uint8), iterations=3, borderType=1, borderValue=1)
 
     contours, hierarchy = cv.findContours(edges, cv.RETR_LIST, cv.CHAIN_APPROX_SIMPLE)
